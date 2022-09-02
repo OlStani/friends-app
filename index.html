@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Friends app</title>
+</head>
+
+<body>
+    <main>
+        <div class="searchFormWrapper">
+            <form class="searchForm" action="#" method="post">
+                <div class="searchByName">
+                    <label for="searchName">Search by name</label>
+                    <input type="text" name="searchName" id="searchName">
+                </div>
+                <div class="sortingByAge">
+                    <label for="alphabet">Sorting by age</label>
+                    <div>
+                        <input type="radio" name="age" value="ageDown" id="ageDown">
+                        <label class='label' for="ageDown">&#11015;</label>
+                        <input type="radio" name="age" value="ageUp" id="ageUp">
+                        <label class='label' for="ageUp">&#11014;</label>
+                    </div>
+                </div>
+                <div class="sortingByAlphabet">
+                    <label for="alphabet">Sorting by alphabet</label>
+                    <div>
+                        <input type="radio" name="alphabet" value="az" id="az">
+                        <label class='label' for="az">A-z</label>
+                        <input type="radio" name="alphabet" value="za" id="za">
+                        <label class='label' for="za">z-A</label>
+                    </div>
+                </div>
+                <div class="filterByGender">
+                    <label class='label' for="male">Male</label>
+                    <input type="checkbox" name="male" id="male">
+                    <label class='label'  for="female">Female</label>
+                    <input type="checkbox" name="female" id="female">
+                </div>
+            </form>
+        </div>
+        <div class="content">
+            <div class="contentWrapper">
+            </div>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+
+</html>
