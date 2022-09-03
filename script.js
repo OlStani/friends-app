@@ -1,4 +1,4 @@
-const url = 'https://randomuser.me/api/?results=30&inc=gender,name,email,dob,phone,picture&seed=foobar'
+const url = 'https://randomuser.me/api/?results=50&inc=gender,name,email,dob,phone,picture&seed=foobar'
 
 const cardsField = document.querySelector('.contentWrapper')
 const form = document.querySelector('.searchForm')
@@ -24,9 +24,8 @@ function loadData() {
 }
 function handleFormChange() {
     const searchedByName = searchByName(users)
-    const sortedByAge = sortingByAge(searchedByName)
-    const sortedByAlphabet = sortingByAlphabet(sortedByAge)
-    const filteredByGender = filterByGender(sortedByAlphabet)
+    const sortedUsers = sortingUsers(searchedByName)
+    const filteredByGender = filterByGender(sortedUsers)
     return renderCards(preparCardsToRender(filteredByGender))
 }
 function searchByName(users) {
@@ -38,8 +37,8 @@ function searchByName(users) {
         return users
     }
 }
-function sortingByAge(users) {
-    if (form.age.value === 'ageDown') {
+function sortingUsers(users) {
+    if (form.sort.value === 'ageDown') {
         return users.sort((user1, user2) => {
             if (user1.dob.age < user2.dob.age) {
                 return -1
@@ -50,7 +49,7 @@ function sortingByAge(users) {
             return 0
         })
     }
-    if (form.age.value === 'ageUp') {
+    if (form.sort.value === 'ageUp') {
         return users.sort((user1, user2) => {
             if (user1.dob.age < user2.dob.age) {
                 return 1
@@ -61,13 +60,8 @@ function sortingByAge(users) {
             return 0
         })
     }
-    if (!form.age.value) {
-        return users
-    }
-}
-function sortingByAlphabet(users) {
-    if (form.alphabet.value === 'az') {
-        return users.sort((user1, user2) => {
+    if (form.sort.value === 'az') {
+        return users = users.sort((user1, user2) => {
             if (user1.name.last < user2.name.last) {
                 return -1
             }
@@ -77,8 +71,8 @@ function sortingByAlphabet(users) {
             return 0
         })
     }
-    if (form.alphabet.value === 'za') {
-        return users.sort((user1, user2) => {
+    if (form.sort.value === 'za') {
+        return users = users.sort((user1, user2) => {
             if (user1.name.last < user2.name.last) {
                 return 1
             }
@@ -88,7 +82,7 @@ function sortingByAlphabet(users) {
             return 0
         })
     }
-    if (!form.alphabet.value) {
+    if (!form.sort.value) {
         return users
     }
 }
@@ -110,12 +104,20 @@ function preparCardsToRender(users) {
     return users
         .map(({ picture, name, gender, dob, phone, email }) => {
             const card = `<div class="userCard">
+            <div class="face face1">
+            <div class="content">
     <img src="${picture.large}" alt="user photo">
     <p class="name">${name.first} ${name.last}</p>
+    </div>
+    </div>
+    <div class="face face2">
+            <div class="content">
     <p class="gender">${gender}</p>
     <p class="age">Age ${dob.age}</p>
     <p class="phone">Tel.:${phone}</p>
     <p class="email">${email}</p>
+    </div>
+    </div>
 </div>`
             return card
         })
