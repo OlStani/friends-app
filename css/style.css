@@ -17,6 +17,10 @@ main {
     display: flex;
     overflow: scroll;
 }
+.burgerForForm{
+    display: none;
+    z-index: 5;
+}
 
 .searchFormWrapper {
     width: 300px;
@@ -26,6 +30,7 @@ main {
     top: 0;
     font-size: 18px;
     line-height: 1.5;
+    z-index: 3;
 }
 
 .searchForm>div {
@@ -36,6 +41,10 @@ main {
 .searchForm input {
     cursor: pointer;
 }
+main>.content{
+    width: calc(100% - 300px);
+
+}
 
 .contentWrapper {
     width: 100%;
@@ -44,6 +53,82 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
 }
+.userCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -100px;
+}
+@media(max-width:1440px){
+    .contentWrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media(max-width:1024px){
+    main{
+        flex-direction: column;
+        padding: 0;
+    }
+    .contentWrapper {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: -50px;
+        padding-top: 0;
+    }
+    .searchFormWrapper{
+        width: 100%;
+        background-color: rgb(33, 33, 33);
+        border-right: 0px; 
+        border-bottom: 1px solid rgb(155, 155, 155);
+    }
+    main>.content {
+        width: 100%;
+    }
+    .searchForm{
+        display: flex;
+        justify-content: space-around;
+    }
+    .searchForm>div{
+        margin-bottom: 0;
+    }
+}
+@media(max-width:768px){
+    .searchFormWrapper{
+        display: none; 
+        width: 100vw;
+        padding: 50px;
+        position: sticky;
+        top: 0;
+        font-size: 18px;
+        line-height: 1.5;
+        z-index: 3;
+    }
+    .searchForm{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+    .searchForm>div {
+        margin-bottom: 50px;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+    }
+
+    .contentWrapper {
+        grid-template-columns: repeat(1, 1fr);
+        margin-top: 0;
+    }
+    .burgerForForm{
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+}
+
 
 .contentWrapper .userCard{
     position: relative;

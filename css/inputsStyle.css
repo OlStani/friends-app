@@ -116,3 +116,51 @@
     color: #4285f4;
     font-weight: 700;
 }
+
+.burgerLabel {
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    cursor: pointer;
+}
+
+.burgerLabel span {
+    background: #4285f4;
+    border-radius: 10px;
+    height: 7px;
+    margin: 7px 0;
+    transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+}
+
+span:nth-of-type(1) {
+    width: 50%;
+}
+
+span:nth-of-type(2) {
+    width: 100%;
+}
+
+span:nth-of-type(3) {
+    width: 75%;
+}
+
+.burgerInput {
+    display: none;
+}
+
+.burgerInput:checked~span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(8px, 0px)
+}
+
+.burgerInput:checked~span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg)
+}
+
+.burgerInput:checked~span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(30px, -11px) rotatez(45deg);
+}

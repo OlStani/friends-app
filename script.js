@@ -1,14 +1,17 @@
 const url = 'https://randomuser.me/api/?results=50&inc=gender,name,email,dob,phone,picture&seed=foobar'
 
 const cardsField = document.querySelector('.contentWrapper')
+const formWrapper = document.querySelector('.searchFormWrapper')
 const form = document.querySelector('.searchForm')
 const searchIput = document.querySelector('#searchName')
+const burgerMenu = document.querySelector('.burgerForForm')
 
 let users = []
 
 document.addEventListener("DOMContentLoaded", loadData)
 form.addEventListener('input', handleFormChange)
 form.addEventListener("submit", (e) => e.preventDefault())
+burgerMenu.addEventListener('click', searchFormSwitch)
 
 function loadData() {
     try {
@@ -103,26 +106,36 @@ function filterByGender(users) {
 function preparCardsToRender(users) {
     return users
         .map(({ picture, name, gender, dob, phone, email }) => {
-            const card = `<div class="userCard">
-            <div class="face face1">
-            <div class="content">
-    <img src="${picture.large}" alt="user photo">
-    <p class="name">${name.first} ${name.last}</p>
-    </div>
-    </div>
-    <div class="face face2">
-            <div class="content">
-    <p class="gender">${gender}</p>
-    <p class="age">Age ${dob.age}</p>
-    <p class="phone">Tel.:${phone}</p>
-    <p class="email">${email}</p>
-    </div>
-    </div>
-</div>`
+            const card =
+                `<div class="userCard">
+                    <div class="face face1">
+                        <div class="content">
+                            <img src="${picture.large}" alt="user photo">
+                            <p class="name">${name.first} ${name.last}</p>
+                        </div>
+                    </div>
+                    <div class="face face2">
+                        <div class="content">
+                            <p class="gender">${gender}</p>
+                            <p class="age">Age ${dob.age}</p>
+                            <p class="phone">Tel.:${phone}</p>
+                            <p class="email">${email}</p>
+                        </div>
+                    </div>
+                </div>`
             return card
         })
         .join('')
 }
 function renderCards(cards) {
     cardsField.innerHTML = cards
+}
+
+function searchFormSwitch() {
+    if (burgerMenu.burgerInput.checked) {
+        formWrapper.style.display = 'block'
+    }
+    if (!burgerMenu.burgerInput.checked) {
+        formWrapper.style.display = 'none'
+    }
 }
