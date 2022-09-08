@@ -41,8 +41,9 @@ async function loadData() {
     }
 }
 function renderPageContent(currentPage) {
-    createPaginationList(prepairUsersForRender(), currentPage)
-    renderCards(preparCardsToRender(getUsersForCurrentPage(prepairUsersForRender(), currentPage)))
+    const usersForRender = prepairUsersForRender()
+    createPaginationList(usersForRender, currentPage)
+    renderCards(preparCardsToRender(getUsersForCurrentPage(usersForRender, currentPage)))
 }
 function prepairUsersForRender() {
     const searchedByName = searchByName(users)
@@ -59,31 +60,31 @@ function searchByName(users) {
     }
     return users
 }
-function sortingUsersByAlphabet(users) {
-    const sortingOrder = form.alphabet.value === 'az' ? -1 : 1
-    console.log(sortingOrder);
-    return users.sort((userA, userB) =>
-        userA.name.first < userB.name.first ? sortingOrder : -sortingOrder)
-
-}
 function sortingUsersByAge(users) {
-    const sortingOrder = form.age.value === 'ageUp' ? -1 : 1
-    // if (form.age.value) {
-    //     return users.sort((userA, userB) =>
-    //         userA.dob.age < userB.dob.age ?
-    //             sortingOrder : userA.dob.age > userB.dob.age ?
-    //                 -sortingOrder : 0)
-    // }
-    if (form.age.value) {
-        users.sort((userA, userB) => userA.dob.age < userB.dob.age ? sortingOrder : userA.dob.age > userB.dob.age ? -sortingOrder : 0)
+    if (form.sort.value === 'ageUp') {
+        return users.sort((userA, userB) =>
+            userA.dob.age < userB.dob.age ? -1 : 1)
+    }
+    if (form.sort.value === 'ageDown') {
+        return users.sort((userA, userB) =>
+            userA.dob.age < userB.dob.age ? 1 : -1)
+    }
+    return users
+}
+function sortingUsersByAlphabet(users) {
+    if (form.sort.value === 'az') {
+        return users.sort((userA, userB) =>
+            userA.name.first < userB.name.first ? -1 : 1)
+    } if (form.sort.value === 'za') {
+        return users.sort((userA, userB) =>
+            userA.name.first > userB.name.first ? 1 : -1)
     }
     return users
 }
 function filterByGender(users) {
     return users.filter(user =>
-        form.gender.value === 'female' ?
-            user.gender === 'female' : form.gender.value === 'male' ?
-                user.gender === 'male' : user)
+        user.gender === form.gender.value || form.gender.value === 'all'
+    )
 }
 function preparCardsToRender(users) {
     return users
